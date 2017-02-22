@@ -1,0 +1,161 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+
+
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
+<link rel="import" href="../bower_components/app-layout/demo/sample-content.html">
+
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
+
+<!-- --------------------------Custom Components----------------------------------->
+<link rel="import" href="filter-dialog.html">
+<link rel="import" href="dialog-button.html">
+<!-- ---------------------------------------------->
+
+<dom-module id="hpcc-info-app">
+
+    <template>
+
+        <style>
+            app-header {
+                background-color: #00897B;
+                color: #fff;
+            }
+            
+            app-header paper-icon-button {
+                --paper-icon-button-ink-color: white;
+            }
+            
+            app-toolbar {
+                background-color: #4285f4;
+                color: #fff;
+            }
+            
+            paper-icon-button {
+                --paper-icon-button-ink-color: white;
+            }
+            
+            paper-icon-button + [main-title] {
+                margin-left: 24px;
+            }
+            
+            paper-progress {
+                display: block;
+                width: 100%;
+                --paper-progress-active-color: rgba(255, 255, 255, 0.5);
+                --paper-progress-container-color: transparent;
+            }
+            
+            app-header {
+                @apply(--layout-fixed-top);
+                color: #fff;
+                --app-header-background-rear-layer: {
+                    background-color: #ef6c00;
+                }
+                ;
+            }
+            
+            app-drawer {
+                --app-drawer-scrim-background: rgba(0, 0, 100, 0.8);
+                --app-drawer-content-container: {
+                    background-color: #B0BEC5;
+                }
+            }
+        </style>
+
+
+        <app-header-layout>
+            <app-header fixed condenses effects="waterfall">
+
+                <app-toolbar>
+                    <paper-menu-button>
+                        <paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
+                        <paper-menu icon="menu" class="dropdown-content">
+                            <paper-item>New Project</paper-item>
+                            <paper-item>Open Project</paper-item>
+                            <paper-item>Project Settings</paper-item>
+                        </paper-menu>
+                    </paper-menu-button>
+
+                    <div main-title>Dataset - Sales Revenue</div>
+
+                    <paper-icon-button icon="create" onclick="modal.open()"></paper-icon-button>
+
+                    <dialog-button dialogId="filter-dialog" icon="search"></dialog-button>
+                    <filter-dialog id="filter-dialog"></filter-dialog>
+
+                    <paper-icon-button icon="code" onclick="modal.open()"></paper-icon-button>
+                    <paper-icon-button icon="cloud-download" onclick="modal.open()"></paper-icon-button>
+                </app-toolbar>
+
+
+                <!--<app-drawer id="drawer" swipe-open height="400px"></app-drawer>-->
+
+
+            </app-header>
+
+            <div>
+                <vaadin-grid id="worksheet">
+                    <table>
+
+                        <col name="product">
+                        <col name="year">
+                        <col name="revenue">
+
+
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Year</th>
+                                <th>Revenue (in millions of US dollar)</th>
+                            </tr>
+                        </thead>
+
+                    </table>
+                </vaadin-grid>
+            </div>
+        </app-header-layout>
+
+
+
+    </template>
+
+    <script>
+                                                                      Polymer({
+                                                                          is: 'hpcc-info-app',
+
+                                                                      });
+
+                                                                      document.addEventListener("WebComponentsReady", function () {
+
+                                                                          // Reference to the grid element.
+                                                                          var grid = document.querySelector("#worksheet");
+
+                                                                          // Add some example data as an array.
+                                                                          grid.items = [
+                                                                              { "product": "Nexum", "year": "2000", "revenue": "10" },
+                                                                              { "product": "Mylanta", "year": "2000", "revenue": "9.9" },
+                                                                              { "product": "Pepcid", "year": "2000", "revenue": "8" },
+                                                                              { "product": "Tums", "year": "2000", "revenue": "11" }
+                                                                          ];
+                                                                      });
+    </script>
+
+</dom-module>

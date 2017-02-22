@@ -1,0 +1,100 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+
+<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
+
+
+<!--- ---------------------------------------------filter dialog------------------------------------------------>
+
+
+<dom-module id="filter-dialog">
+
+    <template>
+
+        <style>
+            paper-button.green {
+                background-color: var(--paper-green-500);
+                color: white;
+            }
+            
+            paper-button.indigo {
+                background-color: var(--paper-indigo-500);
+                color: white;
+                --paper-button-raised-keyboard-focus: {
+                    background-color: var(--paper-pink-a200) !important;
+                    color: white !important;
+                }
+                ;
+            }
+            
+            paper-button.indigo:hover {
+                background-color: var(--paper-indigo-400);
+            }
+            
+            vaadin-combo-box {
+                max-width: 300px;
+            }
+            
+            paper-dialog {
+                width: 500px;
+            }
+        </style>
+
+        <paper-dialog id="dialog">
+
+            <vaadin-combo-box id='field' required label="Field" items='["Product", "Year", "Revenue"]'></vaadin-combo-box>
+            <vaadin-combo-box id='operation' required label="Operation" items='["=", ">", "<",">=","<=","IN","BETWEEN"]'></vaadin-combo-box>
+            <paper-input id='value' label="Value"></paper-input>
+            
+            <paper-button>AND</paper-button>
+            <paper-button>OR</paper-button>
+
+            <vaadin-grid id="filters-grid">
+                <table>
+                    <col name="filter">         
+                    <thead>
+                        <tr>
+                            <th>Filter</th>
+                        </tr>
+                    </thead>
+
+                </table>
+            </vaadin-grid>
+
+            <div class="buttons">
+                <paper-button dialog-confirm raised class="indigo">Ok</paper-button>
+                <paper-button dialog-dismiss raised class="green">Cancel</paper-button>
+            </div>
+        </paper-dialog>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'filter-dialog',
+
+            open: function () {
+                this.$.dialog.open();
+            }
+
+
+        });
+
+        document.addEventListener("WebComponentsReady", function () {
+
+            // Reference to the grid element.
+            var grid = document.querySelector("#filters-grid");
+
+            // Add some example data as an array.
+            grid.items = [
+                { "filter": "Product IN ['Toyota Camry','Honda Accord']" }
+            ];
+        });
+    </script>
+
+
+</dom-module>
