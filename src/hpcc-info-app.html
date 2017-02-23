@@ -27,7 +27,7 @@
 <!-- --------------------------Custom Components----------------------------------->
 <link rel="import" href="filter-dialog.html">
 <link rel="import" href="dialog-button.html">
-<!-- ---------------------------------------------->
+<!-- ------------------------------------------------------------------------------>
 
 <dom-module id="hpcc-info-app">
 
@@ -81,81 +81,79 @@
         </style>
 
 
-        <app-header-layout>
-            <app-header fixed condenses effects="waterfall">
+        <!-- ----------------------- App Header ---------------------------->
 
-                <app-toolbar>
-                    <paper-menu-button>
-                        <paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
-                        <paper-menu icon="menu" class="dropdown-content">
-                            <paper-item>New Project</paper-item>
-                            <paper-item>Open Project</paper-item>
-                            <paper-item>Project Settings</paper-item>
-                        </paper-menu>
-                    </paper-menu-button>
+        <app-toolbar>
+            <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button>
 
-                    <div main-title>Dataset - Sales Revenue</div>
+            <div main-title>Dataset - Sales Revenue</div>
 
-                    <paper-icon-button icon="create" onclick="modal.open()"></paper-icon-button>
+            <paper-icon-button icon="create" onclick="modal.open()"></paper-icon-button>
 
-                    <dialog-button dialogId="filter-dialog" icon="search"></dialog-button>
-                    <filter-dialog id="filter-dialog"></filter-dialog>
+            <dialog-button dialogId="filter-dialog" icon="search"></dialog-button>
+            <filter-dialog id="filter-dialog"></filter-dialog>
 
-                    <paper-icon-button icon="code" onclick="modal.open()"></paper-icon-button>
-                    <paper-icon-button icon="cloud-download" onclick="modal.open()"></paper-icon-button>
-                </app-toolbar>
+            <paper-icon-button icon="code" onclick="modal.open()"></paper-icon-button>
+            <paper-icon-button icon="cloud-download" onclick="modal.open()"></paper-icon-button>
+        </app-toolbar>
 
 
-                <!--<app-drawer id="drawer" swipe-open height="400px"></app-drawer>-->
+
+        <!-- ----------------------- Data Table ---------------------------->
+        <div>
+            <vaadin-grid id="worksheet">
+                <table>
+
+                    <col name="product">
+                    <col name="year">
+                    <col name="revenue">
 
 
-            </app-header>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Year</th>
+                            <th>Revenue (in millions of US dollar)</th>
+                        </tr>
+                    </thead>
 
-            <div>
-                <vaadin-grid id="worksheet">
-                    <table>
+                </table>
+            </vaadin-grid>
+        </div>
 
-                        <col name="product">
-                        <col name="year">
-                        <col name="revenue">
+        <!-- ----------------------- App Drawer Left Position ---------------------------->
 
-
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Year</th>
-                                <th>Revenue (in millions of US dollar)</th>
-                            </tr>
-                        </thead>
-
-                    </table>
-                </vaadin-grid>
-            </div>
-        </app-header-layout>
+        <app-drawer id="drawer" swipe-open>
+            <paper-menu icon="menu">
+                <paper-item>New Project</paper-item>
+                <paper-item>Open Project</paper-item>
+                <paper-item>Project Settings</paper-item>
+            </paper-menu>
+        </app-drawer>
 
 
 
     </template>
 
     <script>
-                                                                      Polymer({
-                                                                          is: 'hpcc-info-app',
+                                                              Polymer({
+                                                                  is: 'hpcc-info-app',
 
-                                                                      });
+                                                              });
 
-                                                                      document.addEventListener("WebComponentsReady", function () {
+                                                              document.addEventListener("WebComponentsReady", function () {
 
-                                                                          // Reference to the grid element.
-                                                                          var grid = document.querySelector("#worksheet");
+                                                                  // Reference to the grid element.
+                                                                  var grid = document.querySelector("#worksheet");
 
-                                                                          // Add some example data as an array.
-                                                                          grid.items = [
-                                                                              { "product": "Nexum", "year": "2000", "revenue": "10" },
-                                                                              { "product": "Mylanta", "year": "2000", "revenue": "9.9" },
-                                                                              { "product": "Pepcid", "year": "2000", "revenue": "8" },
-                                                                              { "product": "Tums", "year": "2000", "revenue": "11" }
-                                                                          ];
-                                                                      });
+                                                                  // Add some example data as an array.
+                                                                  grid.items = [
+                                                                      { "product": "Nexum", "year": "2000", "revenue": "10" },
+                                                                      { "product": "Mylanta", "year": "2000", "revenue": "9.9" },
+                                                                      { "product": "Pepcid", "year": "2000", "revenue": "8" },
+                                                                      { "product": "Tums", "year": "2000", "revenue": "11" }
+                                                                  ];
+                                                              });
     </script>
 
 </dom-module>
