@@ -22,6 +22,8 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/iron-label/iron-label.html">
 <link rel="import" href="../bower_components/paper-styles/color.html">
 
 <!-- --------------------------Custom Components----------------------------------->
@@ -77,7 +79,10 @@
                 --app-drawer-content-container: {
                     background-color: #B0BEC5;
                 }
+                width: 500px;
             }
+
+     
         </style>
 
 
@@ -124,12 +129,22 @@
         <!-- ----------------------- App Drawer Left Position ---------------------------->
 
         <app-drawer id="drawer" swipe-open>
-            <paper-menu icon="menu">
-                <paper-item>New Project</paper-item>
-                <paper-item>Open Project</paper-item>
-                <paper-item>Project Settings</paper-item>
-            </paper-menu>
+            <div role="listbox">
+                <paper-button>
+                     <iron-icon icon="inbox" item-icon></iron-icon> <span style="padding-left: 10px">New Project</span>             
+                </paper-button>
+                <paper-button>
+                     <iron-icon icon="drafts" item-icon></iron-icon> <span style="padding-left: 10px">Open Project</span>             
+                </paper-button>
+                <paper-button>
+                     <iron-icon icon="query-builder" item-icon></iron-icon> <span style="padding-left: 10px">Settings</span>             
+                </paper-button>
+
+            </div>
+
+
         </app-drawer>
+
 
 
 
